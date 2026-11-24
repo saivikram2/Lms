@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vikram LMS | Learning Portal</title>
+  <style>
+    :root{--navy:#14213d;--blue:#3157d5;--pale:#f4f6fc;--ink:#202944;--muted:#74809a;--line:#e8ebf3;--white:#fff;--shadow:0 14px 38px rgba(30,48,94,.09)}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--pale);color:var(--ink)}
+    button,input{font:inherit}button{cursor:pointer;border:0}.hidden{display:none!important}
+    .login-page{min-height:100vh;display:grid;place-items:center;padding:28px;background:linear-gradient(135deg,#eaf0ff,#f7f8fc)}
+    .login-wrap{width:min(100%,1000px);min-height:590px;display:grid;grid-template-columns:1.05fr .95fr;background:white;border-radius:26px;overflow:hidden;box-shadow:var(--shadow)}
+    .login-art{padding:54px;color:white;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,rgba(17,31,65,.92),rgba(49,87,213,.78)),url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=85') center/cover}
+    .brand{font-size:25px;font-weight:800;letter-spacing:-.8px}.brand span{color:#9db4ff}
+    .login-art h1{font-size:42px;line-height:1.12;margin:0 0 16px;max-width:440px}.login-art p{line-height:1.7;color:#e5eaff;max-width:420px}
+    .art-note{font-size:13px;color:#d8e1ff}.login-form{padding:54px 48px;display:flex;flex-direction:column;justify-content:center}
+    .login-form h2{font-size:29px;margin:0 0 8px}.sub{color:var(--muted);margin:0 0 30px;line-height:1.5}
+    label{display:block;font-size:13px;font-weight:700;margin:17px 0 8px}
+    input{width:100%;padding:14px 15px;border:1px solid var(--line);border-radius:11px;outline:none;background:#fbfcff}
+    input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #3157d51a}
+    .primary{background:var(--blue);color:white;padding:14px 20px;border-radius:11px;font-weight:700;box-shadow:0 8px 18px #3157d52c}
+    .primary:hover{background:#2448c1}.full{width:100%;margin-top:24px}.switch{margin-top:22px;text-align:center;color:var(--muted);font-size:14px}.switch a{color:var(--blue);font-weight:700;text-decoration:none}
+    .app{min-height:100vh;display:grid;grid-template-columns:250px 1fr}.sidebar{background:#fff;border-right:1px solid var(--line);padding:26px 18px;position:sticky;top:0;height:100vh}
+    .sidebar .brand{padding:0 12px 30px;color:var(--navy)}.sidebar .brand span{color:var(--blue)}
+    .menu-label{font-size:10px;letter-spacing:1.5px;color:#9aa3b8;font-weight:800;padding:18px 12px 9px}
+    .nav a{display:flex;gap:12px;align-items:center;padding:12px;border-radius:10px;text-decoration:none;color:#65708a;font-size:14px;margin:3px 0}
+    .nav a:hover,.nav a.active{background:#eef2ff;color:var(--blue);font-weight:700}
+    .main{padding:30px 38px;max-width:1500px;width:100%;margin:auto}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:28px}
+    .topbar h1{font-size:27px;margin:0 0 6px}.topbar p{margin:0;color:var(--muted);font-size:14px}
+    .user{display:flex;align-items:center;gap:11px;font-weight:700;font-size:14px}.avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#e8edff;color:var(--blue);font-weight:800}
+    .welcome{border-radius:20px;padding:30px 34px;color:white;background:linear-gradient(100deg,rgba(20,33,61,.96),rgba(49,87,213,.78)),url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1500&q=85') center/cover;display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:190px}
+    .welcome h2{font-size:27px;margin:0 0 9px}.welcome p{color:#e3e9ff;margin:0;line-height:1.6}.welcome .primary{background:white;color:var(--blue);box-shadow:none;white-space:nowrap}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:22px 0 30px}
+    .stat,.panel,.course{background:white;border:1px solid var(--line);border-radius:16px;box-shadow:0 5px 18px rgba(30,48,94,.035)}
+    .stat{padding:18px}.stat small{color:var(--muted);font-weight:600}.stat strong{display:block;font-size:26px;margin-top:9px}.stat .ico{float:right;width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:#eef2ff;color:var(--blue)}
+    .section-head{display:flex;justify-content:space-between;align-items:center;margin:28px 0 15px}.section-head h2{font-size:20px;margin:0}.section-head a{font-size:13px;color:var(--blue);font-weight:700;text-decoration:none}
+    .courses{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+    .course{overflow:hidden}.course img{width:100%;height:150px;object-fit:cover;display:block}.course-body{padding:17px}
+    .pill{font-size:10px;font-weight:800;color:var(--blue);background:#eef2ff;padding:6px 9px;border-radius:20px;display:inline-block}
+    .course h3{font-size:17px;margin:12px 0 7px}.course p{font-size:12px;color:var(--muted);margin:0 0 15px}
+    .progress-row{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:7px}.bar{height:6px;background:#edf0f7;border-radius:10px;overflow:hidden}.bar span{height:100%;display:block;background:var(--blue);border-radius:10px}
+    .course button{margin-top:15px;background:#f0f3ff;color:var(--blue);padding:10px 12px;border-radius:9px;font-size:12px;font-weight:700;width:100%}
+    .lower{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;margin-top:22px}.panel{padding:20px}.panel h3{margin:0 0 16px;font-size:17px}
+    .event{display:flex;align-items:center;gap:13px;padding:12px 0;border-top:1px solid var(--line)}.date{width:45px;height:48px;border-radius:10px;background:#eef2ff;color:var(--blue);display:grid;place-items:center;font-size:11px;font-weight:800;text-align:center}.event strong{font-size:13px}.event p{font-size:12px;color:var(--muted);margin:5px 0 0}
+    .notice{padding:12px 0;border-top:1px solid var(--line);font-size:13px;line-height:1.5}.notice span{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+    .mobile-menu{display:none}
+    @media(max-width:1000px){.app{grid-template-columns:210px 1fr}.main{padding:25px}.stats{grid-template-columns:repeat(2,1fr)}.courses{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:700px){.login-wrap{grid-template-columns:1fr}.login-art{min-height:260px;padding:30px}.login-art h1{font-size:32px}.login-form{padding:34px 26px}.app{display:block}.sidebar{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:14px}.sidebar .brand{padding:5px 8px 12px}.nav{display:flex;overflow:auto}.nav a{white-space:nowrap}.menu-label{display:none}.main{padding:20px 15px}.topbar{align-items:flex-start}.topbar h1{font-size:22px}.welcome{padding:24px;display:block}.welcome .primary{margin-top:18px}.stats{gap:10px}.stat{padding:14px}.stat strong{font-size:22px}.courses{grid-template-columns:1fr}.lower{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <section id="loginPage" class="login-page">
+    <div class="login-wrap">
+      <div class="login-art">
+        <div class="brand">Vikram <span>LMS</span></div>
+        <div><h1>Learn today.<br>Lead tomorrow.</h1><p>Build practical skills, explore expert-led courses and keep your learning journey moving forward.</p></div>
+        <div class="art-note">A smarter space for your learning journey.</div>
+      </div>
+      <form id="loginForm" class="login-form">
+        <h2>Welcome back</h2><p class="sub">Sign in to continue to your learning dashboard.</p>
+        <label for="email">Email address</label><input id="email" type="email" placeholder="you@example.com" required>
+        <label for="password">Password</label><input id="password" type="password" placeholder="Enter your password" required>
+        <button class="primary full" type="submit">Login to LMS</button>
+        <p class="switch">New here? <a href="#" id="showSignup">Create an account</a></p>
+      </form>
+    </div>
+  </section>
+
+  <section id="signupPage" class="login-page hidden">
+    <div class="login-wrap">
+      <div class="login-art"><div class="brand">Vikram <span>LMS</span></div><div><h1>Your next skill starts here.</h1><p>Create your learner profile and get access to courses, sessions and assignments.</p></div><div class="art-note">Learn at your own pace.</div></div>
+      <form id="signupForm" class="login-form">
+        <h2>Create account</h2><p class="sub">Enter your details to get started.</p>
+        <label for="name">Full name</label><input id="name" type="text" placeholder="Your full name" required>
+        <label for="signupEmail">Email address</label><input id="signupEmail" type="email" placeholder="you@example.com" required>
+        <label for="signupPassword">Password</label><input id="signupPassword" type="password" minlength="8" placeholder="At least 8 characters" required>
+        <button class="primary full" type="submit">Create account</button>
+        <p class="switch">Already registered? <a href="#" id="showLogin">Login</a></p>
+      </form>
+    </div>
+  </section>
+
+  <section id="dashboardPage" class="app hidden">
+    <aside class="sidebar">
+      <div class="brand">Vikram <span>LMS</span></div>
+      <div class="menu-label">LEARNING SPACE</div>
+      <nav class="nav">
+        <a class="active" href="#home">⌂ &nbsp; Dashboard</a>
+        <a href="#courses">▤ &nbsp; My courses</a>
+        <a href="#schedule">◷ &nbsp; Schedule</a>
+        <a href="#updates">♧ &nbsp; Updates</a>
+        <a href="#" id="logout">↪ &nbsp; Logout</a>
+      </nav>
+    </aside>
+    <main class="main" id="home">
+      <header class="topbar"><div><h1>My learning dashboard</h1><p>Here’s what’s happening with your learning today.</p></div><div class="user"><div class="avatar" id="avatar">VS</div><span id="userName">Student</span></div></header>
+      <section class="welcome"><div><h2>Welcome back, <span id="welcomeName">Student</span>! 👋</h2><p>Small steps every day lead to big achievements.<br>Pick up where you left off and keep growing.</p></div><a href="#courses"><button class="primary">Explore courses</button></a></section>
+      <section class="stats">
+        <div class="stat"><span class="ico">▤</span><small>Enrolled courses</small><strong>03</strong></div>
+        <div class="stat"><span class="ico">✓</span><small>Completed lessons</small><strong>18</strong></div>
+        <div class="stat"><span class="ico">◷</span><small>Learning hours</small><strong>24.5</strong></div>
+        <div class="stat"><span class="ico">★</span><small>Certificates</small><strong>02</strong></div>
+      </section>
+      <div class="section-head" id="courses"><h2>Continue learning</h2><a href="#courses">View all courses →</a></div>
+      <section class="courses">
+        <article class="course"><img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=80" alt="Artificial intelligence technology"><div class="course-body"><span class="pill">POPULAR COURSE</span><h3>Artificial Intelligence</h3><p>12 lessons · Beginner friendly</p><div class="progress-row"><span>Course progress</span><b>65%</b></div><div class="bar"><span style="width:65%"></span></div><button onclick="alert('Course preview: Artificial Intelligence')">Continue learning</button></div></article>
+        <article class="course"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=900&q=80" alt="Code on a computer screen"><div class="course-body"><span class="pill">PROGRAMMING</span><h3>Python Programming</h3><p>20 lessons · Beginner friendly</p><div class="progress-row"><span>Course progress</span><b>40%</b></div><div class="bar"><span style="width:40%"></span></div><button onclick="alert('Course preview: Python Programming')">Continue learning</button></div></article>
+        <article class="course"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" alt="Web development workspace"><div class="course-body"><span class="pill">WEB DESIGN</span><h3>Web Development</h3><p>15 lessons · Beginner friendly</p><div class="progress-row"><span>Course progress</span><b>25%</b></div><div class="bar"><span style="width:25%"></span></div><button onclick="alert('Course preview: Web Development')">Continue learning</button></div></article>
+      </section>
+      <section class="lower">
+        <div class="panel" id="schedule"><h3>Upcoming sessions</h3>
+          <div class="event"><div class="date">29<br>NOV</div><div><strong>AI & Agent Development</strong><p>11:00 AM – 12:30 PM · Live online session</p></div></div>
+          <div class="event"><div class="date">02<br>DEC</div><div><strong>Python practice workshop</strong><p>2:00 PM – 3:00 PM · Live online session</p></div></div>
+          <div class="event"><div class="date">05<br>DEC</div><div><strong>Web development Q&A</strong><p>10:00 AM – 11:00 AM · Live online session</p></div></div>
+        </div>
+        <div class="panel" id="updates"><h3>Recent updates</h3>
+          <div class="notice">New AI course materials are available.<span>Today · Course update</span></div>
+          <div class="notice">Your Python assignment is ready to review.<span>Yesterday · Assignment</span></div>
+          <div class="notice">Keep going — you’re making progress!<span>This week · Learning tip</span></div>
+        </div>
+      </section>
+    </main>
+  </section>
+  <script>
+    const loginPage=document.getElementById('loginPage'),signupPage=document.getElementById('signupPage'),dashboard=document.getElementById('dashboardPage');
+    document.getElementById('showSignup').addEventListener('click',e=>{e.preventDefault();loginPage.classList.add('hidden');signupPage.classList.remove('hidden')});
+    document.getElementById('showLogin').addEventListener('click',e=>{e.preventDefault();signupPage.classList.add('hidden');loginPage.classList.remove('hidden')});
+    document.getElementById('loginForm').addEventListener('submit',e=>{e.preventDefault();const email=document.getElementById('email').value;const name=email.split('@')[0]||'Student';showDashboard(name)});
+    document.getElementById('signupForm').addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('name').value;alert('Demo account created. You can now log in.');signupPage.classList.add('hidden');loginPage.classList.remove('hidden');document.getElementById('email').value=document.getElementById('signupEmail').value});
+    function showDashboard(name){loginPage.classList.add('hidden');signupPage.classList.add('hidden');dashboard.classList.remove('hidden');document.getElementById('userName').textContent=name;document.getElementById('welcomeName').textContent=name;document.getElementById('avatar').textContent=name.slice(0,2).toUpperCase();window.scrollTo(0,0)}
+    document.getElementById('logout').addEventListener('click',e=>{e.preventDefault();dashboard.classList.add('hidden');loginPage.classList.remove('hidden');document.getElementById('loginForm').reset()});
+  </script>
+</body>
+</html>
